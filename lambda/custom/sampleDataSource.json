@@ -1,0 +1,38 @@
+{
+    "fireTVVlogsData": {
+        "type": "object",
+        "properties": {
+            "selectedItem": 2,
+            "videoItems": [
+                {
+                    "title": "Adventure in NYC",
+                    "description": "This is me in NYC, what a wild ride that was.",
+                    "color": "#A3836A",
+                    "imgSrc": "https://cdn.fodors.com/wp-content/uploads/2016/02/1-Ultimate-New-York-Hero.jpg",
+                    "vidSrc": "https://delivery.vidible.tv/video/redirect/5b634e2dbf488517fc64fbb4.mp4?bcid=5593271909eab110d8f43789&w=852&h=480&enc=mp4&domain=cdn.vidible.tv"
+                },
+                {
+                    "title": "How did I get to Budapest?",
+                    "description": "How did I get here! This trip was insane!",
+                    "color": "#6F74A9",
+                    "imgSrc": "https://i2.wp.com/welovebudapest.com/en/wp-content/uploads/sites/2/2014/08/7b7752427fd698b5f8ed43da8e07cd61.jpg?resize=1920%2C1080&ssl=1",
+                    "vidSrc": "http://techslides.com/demos/sample-videos/small.mp4"
+                },
+                {
+                    "title": "Lost in Paris",
+                    "description": "I have realized I don't speak French. This'll be fun.",
+                    "color": "#98311F",
+                    "imgSrc": "https://a1.r9cdn.net/rimg/dimg/bd/d1/2f268866-city-36014-1651555f8a8.jpg?width=1280&height=800&xhint=2006&yhint=1809&crop=true",
+                    "vidSrc": "https://delivery.vidible.tv/video/redirect/5b634e2dbf488517fc64fbb4.mp4?bcid=5593271909eab110d8f43789&w=852&h=480&enc=mp4&domain=cdn.vidible.tv"
+                },
+                {
+                    "title": "Surprize! I ended up in Jerusalem",
+                    "description": "Got to see some friends and try new food.",
+                    "color": "#E9BC68",
+                    "imgSrc": "https://static.metro.se/0ab/df9/architecture-3197435_1920-LARGE.jpg",
+                    "vidSrc": "http://techslides.com/demos/sample-videos/small.mp4"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,210 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "fire tv vlogs",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GetVideoIntent",
+                    "slots": [
+                        {
+                            "name": "title",
+                            "type": "title"
+                        }
+                    ],
+                    "samples": [
+                        "{title}",
+                        "show me {title}",
+                        "a video",
+                        "show me a video",
+                        "tell me something",
+                        "give me something"
+                    ]
+                },
+                {
+                    "name": "SelectByNumberIntent",
+                    "slots": [
+                        {
+                            "name": "ordinal",
+                            "type": "ordinal"
+                        },
+                        {
+                            "name": "cardinal",
+                            "type": "cardinal"
+                        }
+                    ],
+                    "samples": [
+                        "{cardinal}",
+                        "number {cardinal}",
+                        "item {cardinal}",
+                        "{cardinal} one",
+                        "the {cardinal} one",
+                        "the {cardinal} item",
+                        "video {cardinal}",
+                        "{cardinal} video",
+                        "the {cardinal} video",
+                        "{ordinal}",
+                        "number {ordinal}",
+                        "item {ordinal}",
+                        "{ordinal} one",
+                        "the {ordinal} one",
+                        "the {ordinal} item",
+                        "video {ordinal}",
+                        "{ordinal} video",
+                        "the {ordinal} video"
+                    ]
+                },
+                {
+                    "name": "AMAZON.MoreIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateSettingsIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageUpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollRightIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollLeftIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollUpIntent",
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "title",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Adventure in NYC",
+                                "synonyms": [
+                                    "New York City",
+                                    "New York",
+                                    "NYC"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "How did I get to Budapest",
+                                "synonyms": [
+                                    "Budapest"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Lost in Paris",
+                                "synonyms": [
+                                    "Paris"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Surprize! I ended up in Jerusalem",
+                                "synonyms": [
+                                    "Jerusalem"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ordinal",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "1st"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "2nd"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "3rd"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "4th"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "cardinal",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "1"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "2"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "3"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "4"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

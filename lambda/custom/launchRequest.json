@@ -1,0 +1,197 @@
+{
+    "type": "APL",
+    "version": "1.0",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-viewport-profiles",
+            "version": "1.0.0"
+        }
+    ],
+    "resources": [],
+    "styles": {},
+    "layouts": {
+        "HomeListItem": {
+            "parameters": [
+                "itemInfo"
+            ],
+            "items": [
+                {
+                    "type": "TouchWrapper",
+                    "width": "25vw",
+                    "height": "80vh",
+                    "item": {
+                        "type": "Container",
+                        "width": "25vw",
+                        "height": "80vh",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "${itemInfo.imgSrc}",
+                                "width": "25vw",
+                                "height": "80vh",
+                                "scale": "best-fill",
+                                "position": "absolute"
+                            },
+                            {
+                                "type": "Frame",
+                                "width": "25vw",
+                                "height": "80vh",
+                                "backgroundColor": "${itemInfo.color}",
+                                "opacity": 0.45,
+                                "position": "absolute"
+                            },
+                            {
+                                "type": "Text",
+                                "width": "25vw",
+                                "height": "80vh",
+                                "text": "${ordinal}) ${itemInfo.title}",
+                                "fontSize": "2.5vw",
+                                "color": "#FFFFFF",
+                                "fontWeight": "600",
+                                "textAlign": "center",
+                                "textAlignVertical": "center"
+                            }
+                        ]
+                    },
+                    "onPress": {
+                        "type": "SendEvent",
+                        "arguments": [
+                            "${index}"
+                        ]
+                    }
+                }
+            ]
+        },
+        "HomeListItemSmall": {
+            "parameters": [
+                "itemInfo"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "width": "100vw",
+                    "height": "80vh",
+                    "alignItems": "center",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "${itemInfo.imgSrc}",
+                            "width": "100vw",
+                            "height": "80vh",
+                            "scale": "best-fill",
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "Frame",
+                            "width": "100vw",
+                            "height": "80vh",
+                            "backgroundColor": "${itemInfo.color}",
+                            "opacity": 0.45,
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "Text",
+                            "width": "100vw",
+                            "height": "40vh",
+                            "text": "${ordinal}) ${itemInfo.title}",
+                            "fontSize": "5vw",
+                            "color": "#FFFFFF",
+                            "fontWeight": "600",
+                            "textAlign": "center",
+                            "textAlignVertical": "center"
+                        },
+                        {
+                            "type": "Text",
+                            "width": "90vw",
+                            "height": "20vh",
+                            "text": "<i>${itemInfo.description}</i>",
+                            "fontSize": "4vw",
+                            "color": "#FFFFFF",
+                            "fontWeight": "400",
+                            "textAlign": "center",
+                            "textAlignVertical": "center"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "datasource"
+        ],
+        "items": [
+            {
+                "type": "Container",
+                "width": "100vw",
+                "height": "100vh",
+                "alignItems": "center",
+                "items": [
+                    {
+                        "type": "Frame",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "backgroundColor": "#FFFFFF",
+                        "position": "absolute"
+                    },
+                    {
+                        "when": "${@viewportProfile != @hubRoundSmall}",
+                        "type": "Text",
+                        "text": "Welcome to my FireTV Vlogs!",
+                        "textAlign": "center",
+                        "textAlignVertical": "center",
+                        "width": "100vw",
+                        "height": "20vh",
+                        "fontSize": "5vw",
+                        "fontWeight": "100",
+                        "color": "#000000"
+                    },
+                    {
+                        "when": "${@viewportProfile == @hubRoundSmall}",
+                        "type": "Text",
+                        "text": "Welcome to my FireTV Vlogs!",
+                        "textAlign": "center",
+                        "textAlignVertical": "center",
+                        "width": "100vw",
+                        "height": "25vh",
+                        "fontSize": "5vw",
+                        "fontWeight": "100",
+                        "paddingTop": "10vh",
+                        "color": "#000000"
+                    },
+                    {
+                        "when": "${@viewportProfile != @hubRoundSmall}",
+                        "type": "Container",
+                        "width": "100vw",
+                        "height": "80vh",
+                        "direction": "row",
+                        "data": "${datasource.fireTVVlogsData.properties.videoItems}",
+                        "numbered": true,
+                        "items": [
+                            {
+                                "type": "HomeListItem",
+                                "itemInfo": "${data}"
+                            }
+                        ]
+                    },
+                    {
+                        "when": "${@viewportProfile == @hubRoundSmall}",
+                        "type": "Pager",
+                        "width": "100vw",
+                        "height": "80vh",
+                        "direction": "row",
+                        "data": "${datasource.fireTVVlogsData.properties.videoItems}",
+                        "numbered": true,
+                        "items": [
+                            {
+                                "type": "HomeListItemSmall",
+                                "itemInfo": "${data}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
