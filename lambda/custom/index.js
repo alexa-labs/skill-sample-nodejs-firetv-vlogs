@@ -31,7 +31,7 @@ const ListItemPressedHandler = {
     return request.type === 'Alexa.Presentation.APL.UserEvent' && request.arguments.length > 0;
   },
   handle(handlerInput) {
-    const selectedItem = handlerInput.requestEnvelope.request.arguments[0];
+    const selectedItem = Number(handlerInput.requestEnvelope.request.arguments[0]);
     return handlerInput.responseBuilder
           .speak("Here is the video, enjoy!")
           .addDirective({
