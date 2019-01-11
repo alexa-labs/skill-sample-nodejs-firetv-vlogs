@@ -3,6 +3,8 @@
 
 const Alexa = require('ask-sdk-core');
 const numbers = require('./numbers');
+const noAplSpeechText = 'This is a sample that shows video logs. ' + 
+                        'Try it on an Echo Show, Echo Spot or Fire TV device.'
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -11,17 +13,26 @@ const LaunchRequestHandler = {
   handle(handlerInput) {
     const speechText = 'Welcome to my FireTV Vlogs! Check out the most recent vlogs now!';
 
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
-      .withSimpleCard('FireTV Vlogs', speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        token: "homepage",
-        document: require('./launchRequest.json'),
-        datasources: require('./sampleDataSource.json')
-      })
-      .getResponse();
+    if(supportsAPL(handlerInput))
+    {
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .reprompt(speechText)
+        .withSimpleCard('FireTV Vlogs', speechText)
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            token: "homepage",
+            document: require('./launchRequest.json'),
+            datasources: require('./sampleDataSource.json')
+        })
+        .getResponse();
+    }
+    else
+    {
+        return handlerInput.responseBuilder
+        .speak(noAplSpeechText)
+        .getResponse();
+    }
   },
 };
 
@@ -31,7 +42,7 @@ const ListItemPressedHandler = {
     return request.type === 'Alexa.Presentation.APL.UserEvent' && request.arguments.length > 0;
   },
   handle(handlerInput) {
-    const selectedItem = handlerInput.requestEnvelope.request.arguments[0];
+    const selectedItem = Number(handlerInput.requestEnvelope.request.arguments[0]);
     return handlerInput.responseBuilder
           .speak("Here is the video, enjoy!")
           .addDirective({
@@ -90,34 +101,43 @@ const GetVideoByNumberHandler = {
                                .getResponse();
         }
     
-        return handlerInput.responseBuilder
-          .speak("Here is the video, enjoy!")
-          .addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            token: "VideoPlayerToken",
-            document: require('./videoPlayer.json'),
-            datasources: {
-              "fireTVVlogsData": {
-                  "type": "object",
-                  "properties": {
-                      "selectedItem": selectedItem,
-                      "videoItems": VLOG_DATA
-                  }
+        if(supportsAPL(handlerInput))
+        {
+            return handlerInput.responseBuilder
+            .speak("Here is the video, enjoy!")
+            .addDirective({
+                type: 'Alexa.Presentation.APL.RenderDocument',
+                token: "VideoPlayerToken",
+                document: require('./videoPlayer.json'),
+                datasources: {
+                "fireTVVlogsData": {
+                    "type": "object",
+                    "properties": {
+                        "selectedItem": selectedItem,
+                        "videoItems": VLOG_DATA
+                    }
+                    }
                 }
-            }
-          })
-          .addDirective({
-              type: "Alexa.Presentation.APL.ExecuteCommands",
-              token: "VideoPlayerToken",
-              commands: [
-                {
-                  type: "ControlMedia",
-                  componentId: "myVideoPlayer",
-                  command: "play"
-                }
-              ]
-          })
-          .getResponse();
+            })
+            .addDirective({
+                type: "Alexa.Presentation.APL.ExecuteCommands",
+                token: "VideoPlayerToken",
+                commands: [
+                    {
+                    type: "ControlMedia",
+                    componentId: "myVideoPlayer",
+                    command: "play"
+                    }
+                ]
+            })
+            .getResponse();                   
+        }
+        else
+        {
+            return handlerInput.responseBuilder
+            .speak(noAplSpeechText)
+            .getResponse();
+        }
     }
 }
 
@@ -143,34 +163,43 @@ const GetVideoByTitleHandler = {
                             .getResponse();
         }
         
-        return handlerInput.responseBuilder
-          .speak("Here is the video, enjoy!")
-          .addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            document: require('./videoPlayer.json'),
-            token: "VideoPlayerToken",
-            datasources: {
-              "fireTVVlogsData": {
-                  "type": "object",
-                  "properties": {
-                      "selectedItem": selectedItem,
-                      "videoItems": VLOG_DATA
-                  }
+        if(supportsAPL(handlerInput))
+        {
+            return handlerInput.responseBuilder
+            .speak("Here is the video, enjoy!")
+            .addDirective({
+                type: 'Alexa.Presentation.APL.RenderDocument',
+                document: require('./videoPlayer.json'),
+                token: "VideoPlayerToken",
+                datasources: {
+                "fireTVVlogsData": {
+                    "type": "object",
+                    "properties": {
+                        "selectedItem": selectedItem,
+                        "videoItems": VLOG_DATA
+                    }
+                    }
                 }
-            }
-          })
-          .addDirective({
-              type: "Alexa.Presentation.APL.ExecuteCommands",
-              token: "VideoPlayerToken",
-              commands: [
-                {
-                  type: "ControlMedia",
-                  componentId: "myVideoPlayer",
-                  command: "play"
-                }
-              ]
             })
-          .getResponse();
+            .addDirective({
+                type: "Alexa.Presentation.APL.ExecuteCommands",
+                token: "VideoPlayerToken",
+                commands: [
+                    {
+                    type: "ControlMedia",
+                    componentId: "myVideoPlayer",
+                    command: "play"
+                    }
+                ]
+                })
+            .getResponse();
+        }
+        else
+        {
+            return handlerInput.responseBuilder
+            .speak(noAplSpeechText)
+            .getResponse();
+        }
     }
 }
 
@@ -182,16 +211,25 @@ const HelpIntentHandler = {
   handle(handlerInput) {
     const speechText = 'You can select a video from the list by saying the title or the number!';
 
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
-      .withSimpleCard('FireTV Vlogs', speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        document: require('./launchRequest.json'),
-        datasources: require('./sampleDataSource.json')
-      })
-      .getResponse();
+    if(supportsAPL(handlerInput))
+    {
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .reprompt(speechText)
+        .withSimpleCard('FireTV Vlogs', speechText)
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            document: require('./launchRequest.json'),
+            datasources: require('./sampleDataSource.json')
+        })
+        .getResponse();
+    }
+    else
+    {
+        return handlerInput.responseBuilder
+        .speak(noAplSpeechText)
+        .getResponse();
+    }
   },
 };
 
@@ -266,6 +304,12 @@ const VLOG_DATA = [
     "vidSrc": "http://techslides.com/demos/sample-videos/small.mp4"
   }
 ];
+
+function supportsAPL(handlerInput) {
+    const supportedInterfaces = handlerInput.requestEnvelope.context.System.device.supportedInterfaces;
+    const aplInterface = supportedInterfaces['Alexa.Presentation.APL'];
+    return aplInterface != null && aplInterface != undefined;
+}
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
