@@ -285,8 +285,7 @@
                                     "type": "PlayPauseToggleButton",
                                     "componentId": "myVideoPlayer",
                                     "autoplay": true,
-                                    "buttonSize": "10vh",
-                                    "paddingLeft": "5vw"
+                                    "buttonSize": "10vh"
                                 }       
                             ]
                         }
