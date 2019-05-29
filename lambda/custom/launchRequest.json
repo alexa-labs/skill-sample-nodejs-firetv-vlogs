@@ -94,7 +94,7 @@
                             "type": "Text",
                             "width": "100vw",
                             "height": "40vh",
-                            "text": "${ordinal}) ${itemInfo.title}",
+                            "text": "${itemInfo.title}",
                             "fontSize": "5vw",
                             "color": "#FFFFFF",
                             "fontWeight": "600",
